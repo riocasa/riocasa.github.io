@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    function sendData() {
+      var form = document.getElementById("myForm");
+      var formData = new FormData(form);
+    
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://script.google.com/macros/s/AKfycbwgOWQcxVoKAEg30WLEjhQn_Xnnyo-wp6EzJL2X2vCJJLCAUWOccAJ8Tv-kfhBLiO4nBg/exec", true);
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          // Request was successful
+          console.log(xhr.responseText);
+          // Handle the response here
+        
+        alert('Data successfully stored');
+      var redirectUrl = "/rio_casa.html";
+      var queryParameters = "?";
+      queryParameters += "name=" + encodeURIComponent(formData.get("Name")) + "&";
+      queryParameters += "contact=" + encodeURIComponent(formData.get("Contact")) + "&";
+      queryParameters += "amount=" + encodeURIComponent(formData.get("Advance")) + "&";
+      queryParameters += "balance=" + encodeURIComponent(formData.get("Balance")) + "&";
+      queryParameters += "checkin=" + encodeURIComponent(formData.get("Check in")) + "&";
+      queryParameters += "checkout=" + encodeURIComponent(formData.get("Check out"));
+      window.location.href = redirectUrl + queryParameters;
+        }
+      };
+      xhr.send(formData);
+      
+    }
+  </script>
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+
+
+  <main>
+    <div class="loader"></div>
+    <figure>
+      <picture>
+        <source media="(min-width: 768px)" srcset="//my-assets.netlify.com/codepen/dailyui-001/img.png     340w,
+                              //my-assets.netlify.com/codepen/dailyui-001/img@2x.png  680w,
+                              //my-assets.netlify.com/codepen/dailyui-001/img@3x.png 1020w" sizes="360px" />
+        <source srcset="//my-assets.netlify.com/codepen/dailyui-001/img-small.png     340w,
+                              //my-assets.netlify.com/codepen/dailyui-001/img-small@2x.png  680w,
+                              //my-assets.netlify.com/codepen/dailyui-001/img-small@3x.png 1020w" sizes="(min-width: 320px) 290px,
+                              (min-width: 480px) 435px
+                              (min-width: 640px) 580px" />
+        <img src="//my-assets.netlify.com/codepen/dailyui-001/img.png" alt="Citymap illustration" />
+      </picture>
+    </figure>
+    <div class="headline">
+      <h2 class="text-headline">Rio Casa</h2>
+      <h3 class="text-subheadline">Wayanad</h2>
+    </div>
+    <form id="myForm" onsubmit="event.preventDefault(); sendData();">
+      <input type="hidden" id="today" name="date">
+      <span>
+        <label for="name" class="text-small-uppercase">Name</label>
+        <input class="text-body" id="name" name="Name" type="text" required>
+      </span>
+      <span>
+        <label for="name" class="text-small-uppercase">Contact</label>
+        <input class="text-body" id="contact" name="Contact" type="text" required>
+      </span>
+      <span>
+        <label for="amount" class="text-small-uppercase">Advance</label>
+        <input class="text-body" id="amount" name="Advance" type="text" required>
+      </span>
+      <span>
+        <label for="balance" class="text-small-uppercase">Balance</label>
+        <input class="text-body" id="balance" name="Balance" type="text" required>
+      </span>
+      <div class="dates">
+        <span class="date">
+          <label for="balance" class="text-small-uppercase">Check In</label>
+          <input class="text-body" id="checkin" name="Check in" type="date" required>
+        </span>
+        <span class="date">
+          <label for="balance" class="text-small-uppercase">Check Out</label>
+          <input class="text-body" id="checkout" name="Check out" type="date" required>
+        </span>
+      </div>
+      <input class="text-small-uppercase" id="submit" type="submit" value="Generate">
+    </form>
+  </main>
+
+  <script>
+window.onload = function() {
+  const today = new Date();
+  
+  // Extract day, month, and year
+  const day = String(today.getDate()).padStart(2, '0');
+  const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+  const year = today.getFullYear();
+  
+  // Format the date as DD/MM/YYYY
+  const formattedDate = `${day}/${month}/${year}`;
+  document.getElementById('today').value = formattedDate;
+};
+
+
+    var inputs = document.querySelectorAll('input[type=text], input[type=email]');
+    for (i = 0; i < inputs.length; i++) {
+      var inputEl = inputs[i];
+      if (inputEl.value.trim() !== '') {
+        inputEl.parentNode.classList.add('input--filled');
+      }
+      inputEl.addEventListener('focus', onFocus);
+      inputEl.addEventListener('blur', onBlur);
+    }
+
+    function onFocus(ev) {
+      ev.target.parentNode.classList.add('inputs--filled');
+    }
+
+    function onBlur(ev) {
+      if (ev.target.value.trim() === '') {
+        ev.target.parentNode.classList.remove('inputs--filled');
+      } else if (ev.target.checkValidity() == false) {
+        ev.target.parentNode.classList.add('inputs--invalid');
+        ev.target.addEventListener('input', liveValidation);
+      } else if (ev.target.checkValidity() == true) {
+        ev.target.parentNode.classList.remove('inputs--invalid');
+        ev.target.addEventListener('input', liveValidation);
+      }
+    }
+
+    function liveValidation(ev) {
+      if (ev.target.checkValidity() == false) {
+        ev.target.parentNode.classList.add('inputs--invalid');
+      } else {
+        ev.target.parentNode.classList.remove('inputs--invalid');
+      }
+    }
+
+    var submitBtn = document.querySelector('input[type=submit]');
+    submitBtn.addEventListener('click', onSubmit);
+
+    function onSubmit(ev) {
+      var inputsWrappers = ev.target.parentNode.querySelectorAll('span');
+      for (i = 0; i < inputsWrappers.length; i++) {
+        input = inputsWrappers[i].querySelector('input[type=text], input[type=email]');
+        if (input.checkValidity() == false) {
+          inputsWrappers[i].classList.add('inputs--invalid');
+        } else if (input.checkValidity() == true) {
+          inputsWrappers[i].classList.remove('inputs--invalid');
+        }
+      }
+    }
+
+  </script>
+</body>
+
+</html>

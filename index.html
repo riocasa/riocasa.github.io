@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./js/sheets.js"></script>
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <div id="loader" class="loader"></div>
+  <a href="./customer_data.html" class="data"><img src="./images/customer.png" alt="Icon"></a>
+  <main>
+    <figure>
+      <picture>
+        <source media="(min-width: 768px)" srcset="//my-assets.netlify.com/codepen/dailyui-001/img.png     340w,
+                              //my-assets.netlify.com/codepen/dailyui-001/img@2x.png  680w,
+                              //my-assets.netlify.com/codepen/dailyui-001/img@3x.png 1020w" sizes="360px" />
+        <source srcset="//my-assets.netlify.com/codepen/dailyui-001/img-small.png     340w,
+                              //my-assets.netlify.com/codepen/dailyui-001/img-small@2x.png  680w,
+                              //my-assets.netlify.com/codepen/dailyui-001/img-small@3x.png 1020w" sizes="(min-width: 320px) 290px,
+                              (min-width: 480px) 435px
+                              (min-width: 640px) 580px" />
+        <img src="//my-assets.netlify.com/codepen/dailyui-001/img.png" alt="Citymap illustration" />
+      </picture>
+    </figure>
+    <div class="headline">
+      <h2 class="text-headline">Rio Casa</h2>
+      <h3 class="text-subheadline">Wayanad</h2>
+    </div>
+    <form id="myForm" onsubmit="event.preventDefault(); sendData();">
+      <input type="hidden" id="today" name="date">
+      <span>
+        <label for="name" class="text-small-uppercase">Name</label>
+        <input class="text-body" id="name" name="Name" type="text" required>
+      </span>
+      <span>
+        <label for="name" class="text-small-uppercase">Contact</label>
+        <input class="text-body" id="contact" name="Contact" type="text" required>
+      </span>
+      <span>
+        <label for="amount" class="text-small-uppercase">Advance</label>
+        <input class="text-body" id="amount" name="Advance" type="text" required>
+      </span>
+      <span>
+        <label for="balance" class="text-small-uppercase">Balance</label>
+        <input class="text-body" id="balance" name="Balance" type="text" required>
+      </span>
+      <div class="dates">
+        <span class="date">
+          <label for="balance" class="text-small-uppercase">Check In</label>
+          <input class="text-body" id="checkin" name="Check in" type="date" required>
+        </span>
+        <span class="date">
+          <label for="balance" class="text-small-uppercase">Check Out</label>
+          <input class="text-body" id="checkout" name="Check out" type="date" required>
+        </span>
+      </div>
+      <input class="text-small-uppercase" id="submit" type="submit" value="Generate">
+    </form>
+  </main>
+
+  <script src="./js/script.js"></script>
+</body>
+
+</html>

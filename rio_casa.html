@@ -1,0 +1,182 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RIO CASA</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <style type="text/css">
+    body {
+      margin: 1rem;
+      background-color: #f9f6ed;
+      position: relative;
+    }
+    .nav{
+      
+    position: fixed;
+    display: flex;
+    gap: .5rem;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 99;
+  }
+  .nav-btn>img{
+    width: 2.2rem;
+  }
+  .nav-btn{
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    background-color: #161618;
+    
+  }
+
+    .watermark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 80px;
+      color: rgba(0, 0, 0, 0.1);
+      /* Adjust the color and opacity as desired */
+      font-weight: bold;
+      pointer-events: none;
+      /* Prevent the watermark from being interactive */
+    }
+
+    h1 {
+      color: #1f1e1e;
+      font-style: normal;
+      font-family: Calibri, sans-serif;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 20px;
+      margin: 1rem 0;
+    }
+
+    .dates>p {
+      margin: .5rem 0;
+
+    }
+
+    p,
+    h3 {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 20px;
+      font-size: 16px;
+      font-weight: normal;
+      margin: 1rem 0;
+
+    }
+
+    span {
+      margin: 1rem 0;
+
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      body {
+        margin: 1.6cm;
+        /* Adjust margin as needed */
+      }
+      
+      /* Hide the print button when printing */
+      #printBtn,.nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="watermark">RIO CASA</div>
+  <h1>ADVANCE PAYMENT ACKNOWLEDGEMENT LETTER</h1>
+  <span id="date1"></span>
+  <p>Dear <strong id="name"></strong>,</p>
+  <p>On behalf of RIO CASA, we acknowledge the receipt of your advance payment for our services in the amount of
+    <strong id="amount"></strong>.
+  </p>
+  <p>Our office duly received the said payment on <span id="date2"></span>. Your reference number is <strong
+      id="ref"></strong>. Please keep this number because you will need it in case you want to dispute or question
+    certain invoices. Kindly pay remaining amount of <strong id="balamt"></strong> at the time of check in. </p>
+  <div class="dates">
+    <p>Check in : <b id="checkin"></b></p>
+    <p>Check out : <b id="checkout"></b></p>
+  </div>
+  <p>We appreciate your prompt payment, and we hope to serve you again.</p>
+  <p>Regards,</p>
+  
+  <h3>RIO CASA <br>+91 7907505123</h3>
+  <br><br><br><br><br>
+  <input style="margin: 0;" class="text-small-uppercase" id="printBtn" type="submit" onclick="printPage()"
+    value="Print" />
+    <div class="nav">
+
+      <a class="nav-btn" href="/"
+         ><img src="./images/form.png" alt=""></a>
+      <a class="nav-btn" href="./customer_data.html"
+         ><img src="./images/customer.png" alt=""></a>
+    </div>
+  <script>
+    // Retrieve the form data from the URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get('name');
+    const amount = urlParams.get('amount');
+    const balance = urlParams.get('balance');
+    const checkin = urlParams.get('checkin');
+    const checkout = urlParams.get('checkout');
+    const contact = urlParams.get('contact');
+
+
+    // Update the content with the form data
+    document.getElementById('amount').textContent = '₹' + amount;
+    document.getElementById('name').textContent = name;
+    document.getElementById('ref').textContent = 'RIOCSA' + contact;
+    document.getElementById('balamt').textContent = '₹' + balance;
+    document.getElementById('checkin').textContent = checkin
+    document.getElementById('checkout').textContent = checkout
+    // Today
+    const today = new Date();
+
+    // Extract day, month, and year
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = today.getFullYear();
+
+    // Format the date as DD/MM/YYYY
+    const formattedDate = `${day}/${month}/${year}`;
+    document.getElementById('date1').textContent = formattedDate;
+    document.getElementById('date2').textContent = formattedDate;
+
+    function printPage() {
+      window.print();
+    }
+    function formatDate(dateString) {
+      var dateParts = dateString.split('-');
+      var year = dateParts[0];
+      var month = dateParts[1];
+      var day = dateParts[2];
+
+      // Format day, month, and year with two digits if necessary
+      day = day.length === 1 ? '0' + day : day;
+      month = month.length === 1 ? '0' + month : month;
+
+      // Concatenate formatted day, month, and year
+      var formattedDate = day + '/' + month + '/' + year;
+
+      return formattedDate;
+    }
+  </script>
+</body>
+
+</html>
