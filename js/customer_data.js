@@ -5,7 +5,7 @@ let hpCharacters = [];
 let apiData;
 
 // Make an API request
-fetch('https://script.google.com/macros/s/AKfycbwcV8sq3D3k2Sfsx2dYxCtq5w6Oo9a23Pe5yKK_h2lTRa009h1HwVqnWwoxFiPG7UVSCQ/exec')
+fetch('https://script.google.com/macros/s/AKfycbxkrSqtiOmZ9VAJBeUm2jitGsPBBwYDeLOPetsFhcxiZU6lACJgqlRuS9Q1h87HSA5G6g/exec')
     .then(response => response.json())
     .then(data => {
         apiData = data;
