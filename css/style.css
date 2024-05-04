@@ -1,6 +1,6 @@
 /* Structure */
 body{
-  display: none;
+  display: none !important;
 }
 .loader {
   position: absolute;
