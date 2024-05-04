@@ -60,3 +60,9 @@ function onSubmit(ev) {
     }
   }
 }
+function changeHeaderText() {
+  var selectElement = document.getElementById("resort");
+  var selectedOption = selectElement.options[selectElement.selectedIndex].text;
+  var h2Element = document.getElementById("current-resort");
+  h2Element.textContent = selectedOption;
+}
